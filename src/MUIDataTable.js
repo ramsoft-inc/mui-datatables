@@ -271,7 +271,7 @@ class MUIDataTable extends React.Component {
       filterList: [],
       page: 0,
       previousSelectedRow: null,
-      rowsPerPage: 10,
+      rowsPerPage: 100,
       searchProps: {},
       searchText: null,
       selectedRows: {
