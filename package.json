@@ -16,7 +16,7 @@
     "prettier": "find src/ docs/ test/ -type f -name \"*.js\" ! -path \"*/.next/*\" | xargs prettier --write",
     "lint": "eslint src",
     "build": "node --max_old_space_size=4096 $(yarn bin webpack) --progress --config .webpack/webpack.dev.js",
-		"build:dev": "cross-env NODE_ENV=development yarn run build",
+    "build:dev": "cross-env NODE_ENV=development yarn run build",
     "prepare": "yarn run build"
   },
   "repository": {
