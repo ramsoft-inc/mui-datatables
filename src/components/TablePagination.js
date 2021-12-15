@@ -114,11 +114,11 @@ TablePagination.propTypes = {
   /** Options used to describe table */
   options: PropTypes.object.isRequired,
   /** Current page index */
-  page: PropTypes.number.isRequired,
+  page: PropTypes.number,
   /** Total number allowed of rows per page */
-  rowsPerPage: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.number,
   /** Callback to trigger rows per page change */
-  changeRowsPerPage: PropTypes.func.isRequired,
+  changeRowsPerPage: PropTypes.func,
 };
 
 export default TablePagination;
