@@ -30,15 +30,20 @@ module.exports = {
 	},
 	module: {
 		rules: [
-		{
-			test: /\.(js|jsx)$/,
-			exclude: /(node_modules)/,
-			use: ['babel-loader', 'eslint-loader'],
-		},
-		{
-			test: /\.css$/i,
-			use: ['style-loader', 'css-loader'],
-		},
+			{
+				test: /\.(js|jsx)$/i,
+				exclude: /(node_modules)/,
+				use: ['babel-loader', 'eslint-loader'],
+			},
+			{
+				// css/less
+				test: /\.(le|c)ss$/i,
+				use: ['style-loader', 'css-loader', 'less-loader'],
+			},
+			{
+				test: /\.mdx$/i,
+				use: ['babel-loader', '@mdx-js/loader']
+			},
 		],
 	},
 	plugins: [
