@@ -225,8 +225,7 @@ const TableHeadCell = ({
                     onKeyUp={handleKeyboardSortInput}
                     onClick={handleSortClick}
                     className={classes.toolButton}
-                    data-testid={`headcol-${index}`}
-                    ref={isDraggingEnabled() ? dragRef : null}>
+                    data-testid={`headcol-${index}`}>
                     <div className={classes.sortAction}>
                       <div
                         className={clsx({
@@ -268,27 +267,30 @@ const TableHeadCell = ({
               tooltip: classes.tooltip,
               popper: classes.mypopper,
             }}>
-            <Button
-              variant=""
-              onKeyUp={handleKeyboardSortInput}
-              onClick={handleSortClick}
-              className={classes.toolButton}
-              data-testid={`headcol-${index}`}
-              ref={isDraggingEnabled() ? dragRef : null}>
-              <div className={classes.sortAction}>
-                <div
-                  className={clsx({
-                    [classes.data]: true,
-                    [classes.sortActive]: sortActive,
-                    [classes.dragCursor]: isDraggingEnabled(),
-                  })}>
-                  {children}
-                </div>
-                <div className={classes.sortAction}>
-                  <TableSortLabel {...sortLabelProps} />
-                </div>
-              </div>
-            </Button>
+              <>
+                <Button
+                  variant=""
+                  onKeyUp={handleKeyboardSortInput}
+                  onClick={handleSortClick}
+                  className={classes.toolButton}
+                  data-testid={`headcol-${index}`}
+                  ref={isDraggingEnabled() ? dragRef : null}>
+                  <div className={classes.sortAction}>
+                    <div
+                      className={clsx({
+                        [classes.data]: true,
+                        [classes.sortActive]: sortActive,
+                        [classes.dragCursor]: isDraggingEnabled(),
+                      })}>
+                      {children}
+                    </div>
+                    <div className={classes.sortAction}>
+                      <TableSortLabel {...sortLabelProps} />
+                    </div>
+                  </div>
+                </Button>
+                {!sortLabelProps.active && <div style={{width: 26, height: 1, opacity: 0, pointerEvents: 'none'}} />}
+            </>
           </Tooltip>
           {hint && (
             <Tooltip title={hint}>
