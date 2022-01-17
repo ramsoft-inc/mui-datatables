@@ -74,6 +74,7 @@ const TableHeadCell = ({
   columns,
   columnOrder = [],
   components = {},
+  customHeadLabelRender,
   draggableHeadCellRefs,
   draggingHook,
   hint,
@@ -203,7 +204,57 @@ const TableHeadCell = ({
       data-tableid={tableId}
       onMouseDown={closeTooltip}
       {...otherProps}>
-      {options.sort && sort ? (
+      {customHeadLabelRender ? 
+        <div className={hint ? classes.sortAction : null} ref={isDraggingEnabled() ? dragRef : null}>
+          {customHeadLabelRender(
+            {...column, colPos: colPosition, index}, 
+            <span className={classes.contentWrapper}>
+                <Tooltip
+                  title={getTooltipTitle()}
+                  placement="bottom"
+                  open={sortTooltipOpen}
+                  onOpen={() => (dragging ? setSortTooltipOpen(false) : setSortTooltipOpen(true))}
+                  onClose={() => setSortTooltipOpen(false)}
+                  classes={{
+                    tooltip: classes.tooltip,
+                    popper: classes.mypopper,
+                  }}>
+                  <Button
+                    variant=""
+                    onKeyUp={handleKeyboardSortInput}
+                    onClick={handleSortClick}
+                    className={classes.toolButton}
+                    data-testid={`headcol-${index}`}>
+                    <div className={classes.sortAction}>
+                      <div
+                        className={clsx({
+                          [classes.data]: true,
+                          [classes.sortActive]: sortActive,
+                          [classes.dragCursor]: isDraggingEnabled(),
+                        })}>
+                        {children}
+                      </div>
+                      <div className={classes.sortAction}>
+                        <TableSortLabel {...sortLabelProps} />
+                      </div>
+                    </div>
+                  </Button>
+                </Tooltip>
+            </span>,
+            <Button
+            variant=""
+            onKeyUp={handleKeyboardSortInput}
+            onClick={handleSortClick}
+            className={classes.toolButton}
+            data-testid={`headcol-${index}`}>
+            <div className={classes.sortAction}>
+              <TableSortLabel {...sortLabelProps} active hideSortIcon={false} direction={sortLabelProps.direction || 'desc'} />
+            </div>
+            </Button>,
+            isDraggingEnabled() ? dragRef : null
+            )} 
+        </div>
+      : options.sort && sort ? (
         <span className={classes.contentWrapper}>
           <Tooltip
             title={getTooltipTitle()}
@@ -215,27 +266,30 @@ const TableHeadCell = ({
               tooltip: classes.tooltip,
               popper: classes.mypopper,
             }}>
-            <Button
-              variant=""
-              onKeyUp={handleKeyboardSortInput}
-              onClick={handleSortClick}
-              className={classes.toolButton}
-              data-testid={`headcol-${index}`}
-              ref={isDraggingEnabled() ? dragRef : null}>
-              <div className={classes.sortAction}>
-                <div
-                  className={clsx({
-                    [classes.data]: true,
-                    [classes.sortActive]: sortActive,
-                    [classes.dragCursor]: isDraggingEnabled(),
-                  })}>
-                  {children}
-                </div>
-                <div className={classes.sortAction}>
-                  <TableSortLabel {...sortLabelProps} />
-                </div>
-              </div>
-            </Button>
+              <>
+                <Button
+                  variant=""
+                  onKeyUp={handleKeyboardSortInput}
+                  onClick={handleSortClick}
+                  className={classes.toolButton}
+                  data-testid={`headcol-${index}`}
+                  ref={isDraggingEnabled() ? dragRef : null}>
+                  <div className={classes.sortAction}>
+                    <div
+                      className={clsx({
+                        [classes.data]: true,
+                        [classes.sortActive]: sortActive,
+                        [classes.dragCursor]: isDraggingEnabled(),
+                      })}>
+                      {children}
+                    </div>
+                    <div className={classes.sortAction}>
+                      <TableSortLabel {...sortLabelProps} />
+                    </div>
+                  </div>
+                </Button>
+                {!sortLabelProps.active && <div style={{width: 26, height: 1, opacity: 0, pointerEvents: 'none'}} />}
+            </>
           </Tooltip>
           {hint && (
             <Tooltip title={hint}>
@@ -287,6 +341,7 @@ TableHeadCell.propTypes = {
   column: PropTypes.object,
   /** Injectable component structure **/
   components: PropTypes.object,
+  customHeadLabelRender: PropTypes.func,
 };
 
 export default TableHeadCell;

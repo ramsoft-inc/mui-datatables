@@ -157,10 +157,9 @@ const TableHead = ({
                 draggableHeadCellRefs={draggableHeadCellRefs}
                 tableRef={tableRef}
                 tableId={tableId}
+                customHeadLabelRender={column.customHeadLabelRender}
                 components={components}>
-                {column.customHeadLabelRender
-                  ? column.customHeadLabelRender({ index, colPos, ...column })
-                  : column.label}
+                  {column.label}
               </TableHeadCell>
             )),
         )}
