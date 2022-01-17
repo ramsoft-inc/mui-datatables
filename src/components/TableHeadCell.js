@@ -204,7 +204,6 @@ const TableHeadCell = ({
       data-tableid={tableId}
       onMouseDown={closeTooltip}
       {...otherProps}>
-        {/* TODO: @rs optimize me */}
       {customHeadLabelRender ? 
         <div className={hint ? classes.sortAction : null} ref={isDraggingEnabled() ? dragRef : null}>
           {customHeadLabelRender(
