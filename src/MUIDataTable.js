@@ -88,6 +88,8 @@ class MUIDataTable extends React.Component {
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
     /** Data used to describe table */
     data: PropTypes.array.isRequired,
+    /** Index of the selected row */
+    selectedRowIndex: PropTypes.number,
     /** Columns used to describe table */
     columns: PropTypes.PropTypes.arrayOf(
       PropTypes.oneOfType([
@@ -1798,6 +1800,7 @@ class MUIDataTable extends React.Component {
       classes,
       className,
       title,
+      selectedRowIndex,
       components: {
         TableBody,
         TableFilterList,
@@ -1973,6 +1976,7 @@ class MUIDataTable extends React.Component {
                   columns={columns}
                   page={page}
                   rowsPerPage={rowsPerPage}
+                  selectedRowIndex={selectedRowIndex}
                   selectedRows={selectedRows}
                   selectRowUpdate={this.selectRowUpdate}
                   previousSelectedRow={previousSelectedRow}

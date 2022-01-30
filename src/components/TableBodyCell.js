@@ -5,7 +5,9 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(
   theme => ({
-    root: {},
+    root: {
+      position: 'relative',
+    },
     cellHide: {
       display: 'none',
     },
@@ -98,6 +100,7 @@ function TableBodyCell(props) {
   const {
     children,
     colIndex,
+    selectedRowIndex,
     columnHeader,
     options,
     dataIndex,
@@ -105,9 +108,11 @@ function TableBodyCell(props) {
     className,
     print,
     tableId,
+    components,
     ...otherProps
   } = props;
   const onCellClick = options.onCellClick;
+  const Wheel = components?.Wheel;
 
   const handleClick = useCallback(
     event => {
@@ -204,6 +209,9 @@ function TableBodyCell(props) {
       )}
       {...otherProps}>
       {innerCells}
+      {
+        selectedRowIndex === rowIndex && colIndex === 0 && Wheel
+      }
     </TableCell>
   );
 }

@@ -49,6 +49,8 @@ class TableBody extends React.Component {
     expandedRows: PropTypes.object,
     /** Table rows selected */
     selectedRows: PropTypes.object,
+    /** Index of the selected row */
+    selectedRowIndex: PropTypes.number,
     /** Callback to trigger table row select */
     selectRowUpdate: PropTypes.func,
     /** The most recent row to have been selected/unselected */
@@ -230,6 +232,7 @@ class TableBody extends React.Component {
       columnOrder = this.props.columns.map((item, idx) => idx),
       components = {},
       tableId,
+      selectedRowIndex,
     } = this.props;
     const tableRows = this.buildRows();
     const visibleColCnt = columns.filter(c => c.display === 'true').length;
@@ -301,6 +304,8 @@ class TableBody extends React.Component {
                             : {})}
                           data-testid={`MuiDataTableBodyCell-${column.index}-${rowIndex}`}
                           dataIndex={dataIndex}
+                          components={components}
+                          selectedRowIndex={selectedRowIndex}
                           rowIndex={rowIndex}
                           colIndex={column.index}
                           columnHeader={columns[column.index].label}
