@@ -7,7 +7,7 @@ module.exports = {
 			chunks: "all",
 		},
 		//runtimeChunk: 'single',
-		minimize: isProdBuild,
+		minimize: false,
 		sideEffects: true,
 		moduleIds: 'named'
 	},
