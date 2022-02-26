@@ -77,7 +77,7 @@
     "next": "^12.0.4",
     "nyc": "^15.1.0",
     "prettier": "^2.5.0",
-    "prismjs": "^1.25.0",
+    "prismjs": "^1.27.0",
     "raw-loader": "^4.0.2",
     "react": "^17.0.2",
     "react-dnd-test-backend": "^14.0.1",
